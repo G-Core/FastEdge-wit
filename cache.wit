@@ -3,7 +3,7 @@
 /// This keeps the original `cache` name for backward compatibility with
 /// existing async consumers.
 interface cache {
-  use gcore:fastedge/cache-types.{payload, error};
+  use cache-types.{payload, error};
 
   /// Get the value associated with `key`.
   ///
