@@ -1,8 +1,5 @@
-/// FastEdge cache interface (async variant).
-///
-/// This keeps the original `cache` name for backward compatibility with
-/// existing async consumers.
-interface cache {
+/// FastEdge cache interface (synchronous variant).
+interface cache-sync {
   use gcore:fastedge/cache-types.{payload, error};
 
   /// Get the value associated with `key`.
@@ -11,7 +8,7 @@ interface cache {
   /// - `ok(some(value))` if the key exists.
   /// - `ok(none)` if the key does not exist.
   /// - `err(error)` if the operation fails.
-  get: async func(key: string) -> result<option<payload>, error>;
+  get: func(key: string) -> result<option<payload>, error>;
 
   /// Set the value for `key` with an optional expiry.
   ///
@@ -21,14 +18,14 @@ interface cache {
   /// `ttl-ms` is the time-to-live in milliseconds. Pass `none` for no expiry.
   ///
   /// Returns `err(error)` if the operation fails.
-  set: async func(key: string, value: payload, ttl-ms: option<u64>) -> result<_, error>;
+  set: func(key: string, value: payload, ttl-ms: option<u64>) -> result<_, error>;
 
   /// Delete the key-value pair associated with `key`.
   ///
   /// If the key does not exist, this operation is a no-op.
   ///
   /// Returns `err(error)` if the operation fails.
-  delete: async func(key: string) -> result<_, error>;
+  delete: func(key: string) -> result<_, error>;
 
   /// Check whether `key` exists in the cache.
   ///
@@ -36,7 +33,7 @@ interface cache {
   /// - `ok(true)` if the key exists.
   /// - `ok(false)` if the key does not exist.
   /// - `err(error)` if the operation fails.
-  exists: async func(key: string) -> result<bool, error>;
+  exists: func(key: string) -> result<bool, error>;
 
   /// Increment the integer value stored at `key` by `delta`.
   ///
@@ -45,12 +42,12 @@ interface cache {
   ///
   /// Returns the new value after the increment, or `err(error)` if the
   /// operation fails (for example, if the stored value is not an integer).
-  incr: async func(key: string, delta: s64) -> result<s64, error>;
+  incr: func(key: string, delta: s64) -> result<s64, error>;
 
   /// Set or update the expiry of `key` to `ttl-ms` milliseconds from now.
   ///
   /// If the key does not exist, returns `ok(false)`.
   /// If the expiry was updated successfully, returns `ok(true)`.
   /// Returns `err(error)` if the operation fails.
-  expire: async func(key: string, ttl-ms: u64) -> result<bool, error>;
+  expire: func(key: string, ttl-ms: u64) -> result<bool, error>;
 }
