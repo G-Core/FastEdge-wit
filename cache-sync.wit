@@ -1,6 +1,6 @@
 /// FastEdge cache interface (synchronous variant).
 interface cache-sync {
-  use gcore:fastedge/cache-types.{payload, error};
+  use cache-types.{payload, error};
 
   /// Get the value associated with `key`.
   ///
