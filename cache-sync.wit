@@ -62,8 +62,8 @@ interface cache-sync {
 
   /// Purge all cache entries whose keys begin with `prefix`.
   ///
-  /// The host scans the application's key index using the given prefix as a
-  /// glob pattern, deletes every matched key, and removes the matched entries
+  /// The host scans the application's key index for keys that begin with the
+  /// given prefix, deletes every matched key, and removes the matched entries
   /// from the index (the index itself is kept for any remaining keys).
   ///
   /// Returns the number of keys that were deleted, or `err(error)` if the
