@@ -51,7 +51,7 @@ interface cache-sync {
   /// Returns `err(error)` if the operation fails.
   expire: func(key: string, ttl-ms: u64) -> result<bool, error>;
 
-  /// Purge all cache entries owned by the calling application.
+  /// Purge all cache entries.
   ///
   /// The host scans the application's key index, deletes every cached key,
   /// and then removes the index itself.
