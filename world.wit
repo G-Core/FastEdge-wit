@@ -12,3 +12,9 @@ world reactor {
 
     export http-handler;
 }
+
+/// `reactor` plus the asynchronous `gcore:db/sql` (needs `wasi:io`).
+world reactor-async {
+    include reactor;
+    import gcore:db/sql@0.1.0;
+}
